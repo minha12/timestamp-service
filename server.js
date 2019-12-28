@@ -37,11 +37,12 @@ app.get('api/timestamp/:date', function(req, res){
     return /^d+$/.test(this)
   }
   /*
-  3.If the date string is valid the api returns a JSON having the 
+  4.If the date string is valid the api returns a JSON having the 
   structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
   e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
   */
-  if(req.params.date.includes('-')){
+  console.log()
+  if(req.params.date.includes("-")){
     res.json({
       'unix': new Date(req.params.date).getTime(),
       'utc': new Date(req.params.date).toUTCString()
@@ -51,7 +52,17 @@ app.get('api/timestamp/:date', function(req, res){
       'unix': new Date(parseInt(req.params.date)).getTime(),
       'utc': new Date(parseInt(req.params.date)).toUTCString()
     })  
-    }
+  }else{
+    /*
+    5.If the date string is invalid the api returns a JSON 
+    having the structure {"unix": null, "utc" : "Invalid Date" }. 
+    It is what you get from the date manipulation functions used above.
+    */
+    res.json({
+      'unix': null,
+      'utc': 'Invalid Date'
+    })
+  }
 })
 /*
 3. If the date string is empty it should be equivalent to 
