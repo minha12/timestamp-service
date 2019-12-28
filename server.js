@@ -29,7 +29,7 @@ app.get("/api/hello", function (req, res) {
 /*
 1.The API endpoint is GET [project_url]/api/timestamp/:date_string?
 */
-app.get('/api/timestamp/:date_string?', function(req, res){
+app.get('/api/timestamp/:date_string', function(req, res){
   
   /*
     2.A date string is valid if can be successfully parsed by new 
