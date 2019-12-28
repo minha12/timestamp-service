@@ -25,9 +25,33 @@ app.get("/api/hello", function (req, res) {
 });
 
 ///////////// START OF MY APP /////////////////////////
-?8
-app.get('api/timestamp/:date_string', function(req, res){
-  
+/*
+2.A date string is valid if can be successfully parsed by new 
+Date(date_string) (JS) . Note that the unix timestamp needs 
+to be an integer (not a string) specifying milliseconds. In 
+our test we will use date strings compliant with ISO-8601 
+(e.g. "2016-11-20") because this will ensure an UTC timestamp.
+*/
+app.get('api/timestamp/:date', function(req, res){
+  String.prototype.isNumber = function(){
+    return /^d+$/.test(this)
+  }
+  /*
+  3.If the date string is valid the api returns a JSON having the 
+  structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
+  e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
+  */
+  if(req.params.date.includes('-')){
+    res.json({
+      'unix': new Date(req.params.date).getTime(),
+      'utc': new Date(req.params.date).toUTCString()
+    })
+  }else if(req.params.date.isNumber){
+    res.json({
+      'unix': new Date(parseInt(req.params.date)).getTime(),
+      'utc': new Date(parseInt(req.params.date)).toUTCString()
+    })  
+    }
 })
 /*
 3. If the date string is empty it should be equivalent to 
