@@ -27,49 +27,49 @@ app.get("/api/hello", function (req, res) {
 
 ///////////// START OF MY APP /////////////////////////
 /*
-2.A date string is valid if can be successfully parsed by new 
-Date(date_string) (JS) . Note that the unix timestamp needs 
-to be an integer (not a string) specifying milliseconds. In 
-our test we will use date strings compliant with ISO-8601 
-(e.g. "2016-11-20") because this will ensure an UTC timestamp.
+1.The API endpoint is GET [project_url]/api/timestamp/:date_string?
 */
-app.get('/api/timestamp/:date_string', function(req, res){
+app.get('/api/timestamp/:date_string?', function(req, res){
   
+  /*
+    2.A date string is valid if can be successfully parsed by new 
+    Date(date_string) (JS) . Note that the unix timestamp needs 
+    to be an integer (not a string) specifying milliseconds. In 
+    our test we will use date strings compliant with ISO-8601 
+    (e.g. "2016-11-20") because this will ensure an UTC timestamp.
+  */
   String.prototype.isNumber = function(){
     return /^\d+$/.test(this)
   }
-  /*
-  4.If the date string is valid the api returns a JSON having the 
-  structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
-  e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
-  */
+  
   
   var dateString = req.params.date_string
   var dateObject = new Date(dateString)
+  var dateInt = parseInt(dateString)
   
   if(dateString.isNumber() ){
-    let dateInt = parseInt(dateString)
     res.json({
       'unix': new Date(dateInt).getTime(),
       'utc': new Date(dateInt).toUTCString()
     })  
   }else if(dateObject.toString() === 'Invalid Date'){
-    res.json({"unix": null, "utc" : "Invalid Date" })
-  } else {
-    res.json({
-      'unix': dateObject.valueOf(),
-      'utc': dateObject.toUTCString()
-    })
-  } 
-  
-  
     /*
     5.If the date string is invalid the api returns a JSON 
     having the structure {"unix": null, "utc" : "Invalid Date" }. 
     It is what you get from the date manipulation functions used above.
     */
-    
-  
+    res.json({"error" : "Invalid Date"})
+  } else {
+    /*
+    4.If the date string is valid the api returns a JSON having the 
+    structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
+    e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
+    */
+    res.json({
+      'unix': dateObject.valueOf(),
+      'utc': dateObject.toUTCString()
+    })
+  } 
 })
 /*
 3. If the date string is empty it should be equivalent to 
