@@ -32,8 +32,7 @@ to be an integer (not a string) specifying milliseconds. In
 our test we will use date strings compliant with ISO-8601 
 (e.g. "2016-11-20") because this will ensure an UTC timestamp.
 */
-app.get('api/timestamp/:date_string', function(req, res){
-  console.log(req.params)
+app.get('/api/timestamp/:date', function(req, res){
   String.prototype.isNumber = function(){
     return /^d+$/.test(this)
   }
@@ -42,15 +41,12 @@ app.get('api/timestamp/:date_string', function(req, res){
   structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
   e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
   */
-  console.log(req.params)
+  
   if(req.params.date.includes("-")){
-    res.json(req.params)
-    /*
     res.json({
       'unix': new Date(req.params.date).getTime(),
       'utc': new Date(req.params.date).toUTCString()
     })
-    */
   }else if(req.params.date.isNumber){
     res.json({
       'unix': new Date(parseInt(req.params.date)).getTime(),
