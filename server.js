@@ -36,7 +36,7 @@ our test we will use date strings compliant with ISO-8601
 app.get('/api/timestamp/:date_string', function(req, res){
   
   String.prototype.isNumber = function(){
-    return /\d{5,}/.test(this)
+    return /^\d+$/.test(this)
   }
   /*
   4.If the date string is valid the api returns a JSON having the 
@@ -56,10 +56,9 @@ app.get('/api/timestamp/:date_string', function(req, res){
   }else if(dateObject.toString() === 'Invalid Date'){
     res.json({"unix": null, "utc" : "Invalid Date" })
   } else {
-    console.log(new Date(dateString).getTime())
     res.json({
-      'unix': dateString,
-      'utc': new Date(dateString).toUTCString()
+      'unix': dateObject.valueOf(),
+      'utc': dateObject.toUTCString()
     })
   } 
   
@@ -77,7 +76,7 @@ app.get('/api/timestamp/:date_string', function(req, res){
 trigger new Date(), i.e. the service uses the current timestamp.
 */
 app.get('/api/timestamp', function(req, res){
-  res.json({'Date': new Date()} )
+  res.json({ unix: Date.now(), utc: Date() });
 })
 
 ///////////// END OF MY APP ///////////////////////////
