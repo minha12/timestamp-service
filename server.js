@@ -42,26 +42,24 @@ app.get('/api/timestamp/:date', function(req, res){
   structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
   e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
   */
-  var formats = [
-    'X',
-    'MMMM D, YYYY',
-    'MMMM D YYYY',
-    'MMM D, YYYY',
-    'MMM D YYYY',
-    'D MMMM YYYY',
-    'D MMM YYYY',
-    'D YYYY MMMM',
-    'D YYYY MMM'
-  ]
   
-  var date = moment(req.params.date, formats, true)
-  console.
-  if(date.isValid()){
+  var date = req.params.date
+  
+  if(date.isNumber){
     res.json({
-      'unix': Number(date.format('X')),
-      'utc': date.format('MMMM D, YYYY')
+      'unix': new Date(parseInt(date)).getTime(),
+      'utc': new Date(parseInt(date)).toUTCString()
+    })  
+  }
+  
+  if(date.includes("-")){
+    res.json({
+      'unix': new Date(date).getTime(),
+      'utc': new Date(date).toUTCString()
     })
-  }else{
+  } 
+  
+  else{
     /*
     5.If the date string is invalid the api returns a JSON 
     having the structure {"unix": null, "utc" : "Invalid Date" }. 
