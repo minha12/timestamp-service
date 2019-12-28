@@ -45,22 +45,20 @@ app.get('/api/timestamp/:date_string', function(req, res){
   */
   
   var dateString = req.params.date_string
-  
-  if(dateString.isNumber){
-    res.json({
-      'unix': new Date(parseInt(dateString)).getTime(),
-      'utc': new Date(parseInt(dateString)).toUTCString()
-    })  
-  }
-  
   var dateObject = new Date(dateString)
   
-  if(dateObject.toString() === 'Invalid Date'){
+  if(dateString.isNumber() ){
+    let dateInt = parseInt(dateString)
+    res.json({
+      'unix': new Date(dateInt).getTime(),
+      'utc': new Date(dateInt).toUTCString()
+    })  
+  }else if(dateObject.toString() === 'Invalid Date'){
     res.json({"unix": null, "utc" : "Invalid Date" })
   } else {
     console.log(new Date(dateString).getTime())
     res.json({
-      'unix': new Date(dateString).getTime(),
+      'unix': dateString,
       'utc': new Date(dateString).toUTCString()
     })
   } 
