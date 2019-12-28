@@ -52,21 +52,24 @@ app.get('/api/timestamp/:date', function(req, res){
     })  
   }
   
-  if(date.includes("-")){
+  var dateObject = new Date(date)
+  if(dateObject.toString() === 'Invalid Date'){
+    res.json({"unix": null, "utc" : "Invalid Date" })
+  } else{
     res.json({
       'unix': new Date(date).getTime(),
       'utc': new Date(date).toUTCString()
     })
   } 
   
-  else{
+  
     /*
     5.If the date string is invalid the api returns a JSON 
     having the structure {"unix": null, "utc" : "Invalid Date" }. 
     It is what you get from the date manipulation functions used above.
     */
-    res.json({"unix": null, "utc" : "Invalid Date" })
-  }
+    
+  
 })
 /*
 3. If the date string is empty it should be equivalent to 
