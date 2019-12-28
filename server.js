@@ -55,11 +55,11 @@ app.get('/api/timestamp/:date', function(req, res){
   ]
   
   var date = moment(req.params.date, formats, true)
-  
+  console.
   if(date.isValid()){
     res.json({
       'unix': Number(date.format('X')),
-      'utc': date).toUTCString()
+      'utc': date.format('MMMM D, YYYY')
     })
   }else{
     /*
