@@ -4,6 +4,7 @@
 // init project
 var express = require('express');
 var app = express();
+var moment = require('moment');
 
 // enable CORS (https://en.wikipedia.org/wiki/Cross-origin_resource_sharing)
 // so that your API is remotely testable by FCC 
@@ -41,17 +42,25 @@ app.get('/api/timestamp/:date', function(req, res){
   structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
   e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
   */
+  var formats = [
+    'X',
+    'MMMM D, YYYY',
+    'MMMM D YYYY',
+    'MMM D, YYYY',
+    'MMM D YYYY',
+    'D MMMM YYYY',
+    'D MMM YYYY',
+    'D YYYY MMMM',
+    'D YYYY MMM'
+  ]
   
-  if(req.params.date.includes("-")){
+  var date = moment(req.params.date, formats, true)
+  
+  if(date.isValid()){
     res.json({
-      'unix': new Date(req.params.date).getTime(),
-      'utc': new Date(req.params.date).toUTCString()
+      'unix': Number(date.format('X')),
+      'utc': date).toUTCString()
     })
-  }else if(req.params.date.isNumber){
-    res.json({
-      'unix': new Date(parseInt(req.params.date)).getTime(),
-      'utc': new Date(parseInt(req.params.date)).toUTCString()
-    })  
   }else{
     /*
     5.If the date string is invalid the api returns a JSON 
