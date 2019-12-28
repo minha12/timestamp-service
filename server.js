@@ -43,10 +43,13 @@ app.get('api/timestamp/:date', function(req, res){
   */
   console.log(req.params.date)
   if(req.params.date.includes("-")){
+    res.json(req.params)
+    /*
     res.json({
       'unix': new Date(req.params.date).getTime(),
       'utc': new Date(req.params.date).toUTCString()
     })
+    */
   }else if(req.params.date.isNumber){
     res.json({
       'unix': new Date(parseInt(req.params.date)).getTime(),
