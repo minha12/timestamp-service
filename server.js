@@ -24,6 +24,20 @@ app.get("/api/hello", function (req, res) {
   res.json({greeting: 'hello API'});
 });
 
+///////////// START OF MY APP /////////////////////////
+?8
+app.get('api/timestamp/:date_string', function(req, res){
+  
+})
+/*
+3. If the date string is empty it should be equivalent to 
+trigger new Date(), i.e. the service uses the current timestamp.
+*/
+app.get('/api/timestamp', function(req, res){
+  res.json({'Date': new Date()} )
+})
+
+///////////// END OF MY APP ///////////////////////////
 
 
 // listen for requests :)
