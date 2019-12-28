@@ -58,10 +58,7 @@ app.get('/api/timestamp/:date', function(req, res){
     having the structure {"unix": null, "utc" : "Invalid Date" }. 
     It is what you get from the date manipulation functions used above.
     */
-    res.json({
-      'unix': null,
-      'utc': 'Invalid Date'
-    })
+    res.json({"unix": null, "utc" : "Invalid Date" })
   }
 })
 /*
