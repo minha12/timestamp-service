@@ -41,7 +41,7 @@ app.get('api/timestamp/:date', function(req, res){
   structure {"unix": <date.getTime()>, "utc" : <date.toUTCString()> } 
   e.g. {"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}.
   */
-  console.log()
+  console.log(req.params.date)
   if(req.params.date.includes("-")){
     res.json({
       'unix': new Date(req.params.date).getTime(),
