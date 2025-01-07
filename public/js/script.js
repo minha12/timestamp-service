@@ -1,3 +1,9 @@
+// Configure API base URL
+const BASE_URL = window.location.hostname === 'localhost' 
+? '' 
+: 'https://minha12.github.io/timestamp-service';
+
+
 async function testAPI() {
   const dateInput = document.getElementById('dateInput').value;
   const result = document.getElementById('result');
