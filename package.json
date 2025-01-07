@@ -4,7 +4,8 @@
 	"description": "An FCC Backend Challenge",
 	"main": "server.js",
 	"scripts": {
-		"start": "node server.js"
+		"start": "node server.js",
+		"build": "mkdir -p public && cp -r views/* public/"
 	},
 	"dependencies": {
 		"express": "^4.14.4",
@@ -25,5 +26,7 @@
 		"express",
 		"freecodecamp"
 	],
-	"license": "MIT"
+	"license": "MIT",
+	"homepage": "https://minha12.github.io/timestamp-service"
+
 }
