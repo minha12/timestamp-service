@@ -11,7 +11,7 @@ var app = express();
 var cors = require('cors');
 app.use(cors({optionSuccessStatus: 200}));  // some legacy browsers choke on 204
 
-// http://expressjs.com/en/starter/static-files.html
+// Update the static files middleware to use the public directory
 app.use(express.static('public'));
 
 // http://expressjs.com/en/starter/basic-routing.html
