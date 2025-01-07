@@ -9,7 +9,7 @@ async function testAPI() {
   const result = document.getElementById('result');
   
   try {
-    const response = await fetch(`/api/timestamp/${dateInput}`);
+    const response = await fetch(`${BASE_URL}/api/timestamp/${dateInput}`);
     const data = await response.json();
     result.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
   } catch (error) {
@@ -21,7 +21,7 @@ async function testCurrentTime() {
   const result = document.getElementById('result');
   
   try {
-    const response = await fetch('/api/timestamp');
+    const response = await fetch(`${BASE_URL}/api/timestamp`);
     const data = await response.json();
     result.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
   } catch (error) {
