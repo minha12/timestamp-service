@@ -1,7 +1,7 @@
 // Configure API base URL
 const BASE_URL = window.location.hostname === 'localhost' 
 ? '' 
-: 'https://minha12.github.io/timestamp-service';
+: 'https://timestamp-service-uwh9.onrender.com';
 
 
 async function testAPI() {
