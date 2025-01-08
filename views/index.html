@@ -12,53 +12,109 @@
    <body>
 
       <div class="container">
-        <h2>API Project: Timestamp Microservice</h2>
+        <h1>Timestamp Microservice API Documentation</h1>
         
-        <!-- Demo Section -->
-        <div class="demo-section">
-          <h3>Try it out!</h3>
-          <div class="input-group">
-            <input type="text" id="dateInput" placeholder="Enter date (e.g., 2015-12-25)">
-            <button onclick="testAPI()">Test API</button>
-            <button onclick="testCurrentTime()">Current Time</button>
+        <div class="endpoint-section">
+          <div class="endpoint-header">
+            <span class="method-get">GET</span>
+            <code>/api/timestamp/:date_string?</code>
           </div>
-          <div id="result">Results will appear here...</div>
+          <div class="endpoint-description">
+            <p>Returns the Unix timestamp and UTC string for a given date.</p>
+            
+            <h3>Demo</h3>
+            <div class="demo-box">
+              <div class="input-group">
+                <input type="text" id="dateInput" placeholder="Enter date (e.g., 2015-12-25)">
+                <button onclick="testAPI()">Test API</button>
+                <button onclick="testCurrentTime()">Current Time</button>
+              </div>
+              <div id="result" class="response">Results will appear here...</div>
+            </div>
+
+            <h3>Parameters</h3>
+            <table class="params-table">
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+              <tr>
+                <td>date_string</td>
+                <td>string</td>
+                <td>Optional. Date in ISO-8601 format or Unix timestamp</td>
+              </tr>
+            </table>
+
+            <div class="examples-section">
+              <h3>Example 1: Valid ISO Date</h3>
+              <div class="example-box">
+                <div class="request">
+                  <span class="method-get">GET</span>
+                  <code>/api/timestamp/2015-12-25</code>
+                </div>
+                <div class="response">
+                  <h4>Response:</h4>
+                  <pre>{
+  "unix": 1451001600000,
+  "utc": "Fri, 25 Dec 2015 00:00:00 GMT"
+}</pre>
+                </div>
+              </div>
+
+              <h3>Example 2: Unix Timestamp</h3>
+              <div class="example-box">
+                <div class="request">
+                  <span class="method-get">GET</span>
+                  <code>/api/timestamp/1451001600000</code>
+                </div>
+                <div class="response">
+                  <h4>Response:</h4>
+                  <pre>{
+  "unix": 1451001600000,
+  "utc": "Fri, 25 Dec 2015 00:00:00 GMT"
+}</pre>
+                </div>
+              </div>
+
+              <h3>Example 3: Current Time</h3>
+              <div class="example-box">
+                <div class="request">
+                  <span class="method-get">GET</span>
+                  <code>/api/timestamp</code>
+                </div>
+                <div class="response">
+                  <h4>Response:</h4>
+                  <pre>{
+  "unix": 1683900000000,
+  "utc": "Fri, 12 May 2023 12:00:00 GMT"
+}</pre>
+                </div>
+              </div>
+
+              <h3>Example 4: Invalid Date</h3>
+              <div class="example-box">
+                <div class="request">
+                  <span class="method-get">GET</span>
+                  <code>/api/timestamp/invalid-date</code>
+                </div>
+                <div class="response">
+                  <h4>Response:</h4>
+                  <pre>{
+  "unix": null,
+  "utc": "Invalid Date"
+}</pre>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <h3>User Stories :</h3>
-        <ol class="user-stories">
-          
-          <li>The API endpoint is <code>GET [project_url]/api/timestamp/:date_string?</code></li>
-          <li>A date string is valid if can be successfully parsed by <code>new Date(date_string)</code>.<br>
-          Note that the unix timestamp needs to be an <strong>integer</strong> (not a string) specifying <strong>milliseconds</strong>.<br> 
-          In our test we will use date strings compliant with ISO-8601 (e.g. <code>"2016-11-20"</code>) because this will ensure an UTC timestamp.</li>
-          <li>If the date string is <strong>empty</strong> it should be equivalent to trigger <code>new Date()</code>, i.e. the service uses the current timestamp.</li>
-          <li>If the date string is <strong>valid</strong> the api returns a JSON having the structure<br><code>{"unix": &lt;date.getTime()&gt;, "utc" : &lt;date.toUTCString()&gt; }</code><br>
-            e.g. <code>{"unix": 1479663089000 ,"utc": "Sun, 20 Nov 2016 17:31:29 GMT"}</code></li>
-          <li>If the date string is <strong>invalid</strong> the api returns a JSON having the structure <br>
-              <code>{"unix": null, "utc" : "Invalid Date" }</code>. It is what you get from the date manipulation functions used above.
-          </li>
-        </ol>
-
-        <h3>Example Usage:</h3>
-        <ul>
-          <li>
-            <code>GET [project url]/api/timestamp/2015-12-25</code></li>
-          <li><code>GET project url]/api/timestamp/1450137600</code></li>
-        </ul>
-
-        <h3>Example Output:</h3>
-        <p>
-          <code>{"unix":1451001600000, "utc":"Fri, 25 Dec 2015 00:00:00 GMT"}</code>
-        </p>
       </div>
       
       <script src="/js/script.js"></script>
 
       <div class="footer">
-        <p>
-          by <a href="http://www.freecodecamp.com/">freeCodeCamp</a> | <a href="https://hyperdev.com/#!/remix/FCC_API_timestamp_bplate/8338be2-a353-4892-8a0d-6295e4f12eb5">Click here to Remix</a>
-        </p>
+        <p>by <a href="http://www.freecodecamp.com/">freeCodeCamp</a></p>
       </div>
    </body>
 
