@@ -2,7 +2,7 @@ body {
   font-family: 'Roboto', sans-serif;
   line-height: 1.6;
   color: #333;
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f5f5f5;
@@ -15,9 +15,93 @@ body {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-h2, h3 {
+h1, h2, h3, h4 {
   color: #2c3e50;
   margin-top: 30px;
+}
+
+.endpoint-section {
+  margin: 40px 0;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+}
+
+.endpoint-header {
+  padding: 15px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e0e0e0;
+  border-radius: 8px 8px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.method-get {
+  background: #61affe;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.endpoint-description {
+  padding: 20px;
+}
+
+.example-box {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  margin: 15px 0;
+}
+
+.request {
+  padding: 15px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.response {
+  padding: 15px;
+}
+
+.response pre {
+  background: #2c3e50;
+  color: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+}
+
+.params-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+}
+
+.params-table th,
+.params-table td {
+  border: 1px solid #e0e0e0;
+  padding: 10px;
+  text-align: left;
+}
+
+.params-table th {
+  background: #f8f9fa;
+}
+
+.demo-box {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 4px;
+  margin: 20px 0;
+}
+
+.response-box {
+  background: #2c3e50;
+  color: #fff;
+  padding: 15px;
+  border-radius: 4px;
+  margin-top: 15px;
 }
 
 .user-stories {
